@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDR Avaliação - Relatório do Aluno</title>
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #EFF6FF, #ffffff);
+            color: #1F2937;
+            padding-bottom: 2rem;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3B82F6;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #3B82F6;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: #2563EB;
+        }
+        
+        .back-icon::before {
+            content: "←";
+            margin-right: 0.5rem;
+        }
+        
+        /* Card */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #DBEAFE;
+            margin-bottom: 2rem;
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background-color: #EFF6FF;
+            border-bottom: 1px solid #DBEAFE;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3B82F6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        /* Form */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .form-grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #DBEAFE;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            background-color: white;
+            transition: border-color 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+        
+        .form-select:focus {
+            outline: none;
+            border-color: #93C5FD;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #E5E7EB;
+            color: #4B5563;
+        }
+        
+        .btn-outline:hover {
+            background-color: #F3F4F6;
+        }
+        
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        
+        /* Info box */
+        .info-box {
+            background-color: #EFF6FF;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1E40AF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-text {
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+        
+        /* Relatório */
+        .relatorio-container {
+            display: none; /* Inicialmente oculto */
+            margin-top: 2rem;
+        }
+        
+        .relatorio-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .relatorio-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .relatorio-subtitle {
+            font-size: 1rem;
+            color: #4B5563;
+        }
+        
+        .relatorio-data {
+            text-align: right;
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .relatorio-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #3B82F6;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #DBEAFE;
+        }
+        
+        .dados-aluno {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .dados-aluno {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .dado-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .dado-label {
+            font-weight: 500;
+            color: #4B5563;
+            margin-right: 0.5rem;
+        }
+        
+        .dado-valor {
+            color: #1F2937;
+        }
+        
+        /* Tabela de resultados */
+        .resultados-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .resultados-table th {
+            background-color: #EFF6FF;
+            color: #1F2937;
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 2px solid #DBEAFE;
+        }
+        
+        .resultados-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .resultados-table tr:nth-child(even) {
+            background-color: #F9FAFB;
+        }
+        
+        .col-habilidade {
+            width: 15%;
+            font-weight: 600;
+            color: #3B82F6;
+        }
+        
+        .col-descricao {
+            width: 55%;
+        }
+        
+        .col-resultado {
+            width: 30%;
+        }
+        
+        /* Resultado positivo/negativo */
+        .resultado-positivo {
+            color: #059669;
+            font-weight: 500;
+        }
+        
+        .resultado-negativo {
+            color: #DC2626;
+            font-weight: 500;
+        }
+        
+        .resultado-neutro {
+            color: #6B7280;
+            font-style: italic;
+        }
+        
+        /* Aspectos de avaliação */
+        .aspectos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background-color: #F9FAFB;
+            border-radius: 0.25rem;
+        }
+        
+        .aspecto-item {
+            font-size: 0.8125rem;
+        }
+        
+        .aspecto-label {
+            font-weight: 500;
+            margin-right: 0.25rem;
+        }
+        
+        /* Conclusão */
+        .conclusao {
+            background-color: #F3F4F6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .conclusao-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 1rem;
+        }
+        
+        .conclusao-text {
+            line-height: 1.6;
+            color: #4B5563;
+        }
+        
+        /* Assinatura */
+        .assinatura {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .assinatura-linha {
+            width: 60%;
+            max-width: 300px;
+            margin: 0 auto;
+            border-top: 1px solid #9CA3AF;
+            padding-top: 0.5rem;
+        }
+        
+        .assinatura-nome {
+            font-weight: 500;
+        }
+        
+        .assinatura-cargo {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+        
+        /* Botão de imprimir */
+        .print-container {
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .btn-print {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .print-icon::before {
+            content: "🖨️";
+            font-size: 1.25rem;
+        }
+        
+        /* Ícones */
+        .icon-report::before {
+            content: "📊";
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .icon-logout::before {
+            content: "↪";
+            font-size: 1rem;
+            margin-right: 0.25rem;
+        }
+        
+        /* Estilos para impressão */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            
+            header, .back-link, .card-header, .form-grid, .btn-group, .print-container {
+                display: none !important;
+            }
+            
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+            
+            .card-content {
+                padding: 0;
+            }
+            
+            .relatorio-container {
+                display: block !important;
+                margin-top: 0;
+            }
+            
+            .relatorio-header {
+                margin-bottom: 1rem;
+            }
+            
+            .relatorio-section {
+                margin-bottom: 1rem;
+            }
+            
+            .section-title {
+                margin-bottom: 0.5rem;
+            }
+            
+            .conclusao {
+                background-color: white;
+                border: 1px solid #E5E7EB;
+            }
+            
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">NDR Avaliação</div>
+                <div class="user-actions">
+                    <span class="user-name">Professor(a) Ana Silva</span>
+                    <a href="login.html" class="btn btn-outline">
+                        <span class="icon-logout"></span>
+                        Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="GestaoUsuario.html" class="back-link">
+            <span class="back-icon"></span>
+            Voltar para o painel
+        </a>
+        
+        <!-- Formulário de Seleção -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title"><span class="icon-report"></span>Relatório do Aluno</h1>
+                <p class="card-description">Selecione o aluno para visualizar o relatório de avaliação NDR</p>
+            </div>
+            
+            <div class="card-content">
+                <div class="info-box">
+                    <h3 class="info-title">Instruções</h3>
+                    <p class="info-text">Selecione o ano, a turma e o aluno para gerar o relatório de avaliação NDR. O relatório apresentará os dados do aluno e os resultados da avaliação de habilidades.</p>
+                </div>
+                
+                <form id="selectionForm">
+                    <div class="form-grid form-grid-3">
+                        <div class="form-group">
+                            <label for="ano" class="form-label">Ano</label>
+                            <select id="ano" class="form-select" required>
+                                <option value="" disabled selected>Selecione o ano</option>
+                                <option value="1">1º Ano</option>
+                                <option value="2">2º Ano</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="turma" class="form-label">Turma</label>
+                            <select id="turma" class="form-select" required disabled>
+                                <option value="" disabled selected>Selecione a turma</option>
+                                <option value="A">Turma A</option>
+                                <option value="B">Turma B</option>
+                                <option value="C">Turma C</option>
+                                <option value="D">Turma D</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="aluno" class="form-label">Aluno</label>
+                            <select id="aluno" class="form-select" required disabled>
+                                <option value="" disabled selected>Selecione o aluno</option>
+                                <!-- Opções serão carregadas dinamicamente -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button type="button" id="btnRelatorio" class="btn btn-primary" disabled>Gerar Relatório</button>
+                        <button type="button" id="btnLimpar" class="btn btn-outline">Limpar</button>
+                    </div>
+                </form>
+                
+                <!-- Relatório do Aluno -->
+                <div id="relatorioContainer" class="relatorio-container">
+                    <div class="relatorio-header">
+                        <h2 class="relatorio-title">RELATÓRIO DE AVALIAÇÃO NDR</h2>
+                        <p class="relatorio-subtitle">Nível de Desenvolvimento Real</p>
+                    </div>
+                    
+                    <div class="relatorio-data">
+                        <p>Data de emissão: <span id="dataEmissao">01/06/2023</span></p>
+                    </div>
+                    
+                    <!-- Dados do Aluno -->
+                    <div class="relatorio-section">
+                        <h3 class="section-title">Dados do Aluno</h3>
+                        <div class="dados-aluno">
+                            <div class="dado-item">
+                                <span class="dado-label">Nome:</span>
+                                <span id="nomeAluno" class="dado-valor">Bruno Santos</span>
+                            </div>
+                            <div class="dado-item">
+                                <span class="dado-label">Data de Nascimento:</span>
+                                <span id="dataNascimento" class="dado-valor">15/03/2016</span>
+                            </div>
+                            <div class="dado-item">
+                                <span class="dado-label">Ano/Turma:</span>
+                                <span id="anoTurma" class="dado-valor">1º Ano - Turma A</span>
+                            </div>
+                            <div class="dado-item">
+                                <span class="dado-label">Telefone:</span>
+                                <span id="telefone" class="dado-valor">(11) 98765-4321</span>
+                            </div>
+                            <div class="dado-item">
+                                <span class="dado-label">E-mail:</span>
+                                <span id="email" class="dado-valor">responsavel.bruno@email.com</span>
+                            </div>
+                            <div class="dado-item">
+                                <span class="dado-label">CPF:</span>
+                                <span id="cpf" class="dado-valor">123.456.789-00</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Resultados da Avaliação -->
+                    <div class="relatorio-section">
+                        <h3 class="section-title">Resultados da Avaliação NDR</h3>
+                        
+                        <table class="resultados-table">
+                            <thead>
+                                <tr>
+                                    <th class="col-habilidade">Habilidade</th>
+                                    <th class="col-descricao">Descrição</th>
+                                    <th class="col-resultado">Resultado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- EIXO DO CONHECIMENTO: ANÁLISE LINGUÍSTICA/SEMIÓTICA -->
+                                <tr>
+                                    <td class="col-habilidade">H1</td>
+                                    <td class="col-descricao">Diferenciar desenhos/grafismos (símbolos) de grafemas/letras (signos).</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H2</td>
+                                    <td class="col-descricao">Reconhecer as letras do alfabeto em contexto de palavras.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H3</td>
+                                    <td class="col-descricao">Reconhecer sílabas em diferentes padrões.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H4</td>
+                                    <td class="col-descricao">Manipular as unidades menores (fonemas e/ou sílabas) de uma palavra para formar novas palavras.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H5</td>
+                                    <td class="col-descricao">Identificar rimas.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H6</td>
+                                    <td class="col-descricao">Identificar o número de sílabas de uma palavra.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H7</td>
+                                    <td class="col-descricao">Relacionar palavras que apresentem o mesmo número de sílabas.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H8</td>
+                                    <td class="col-descricao">Ler palavras no padrão canônico.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H9</td>
+                                    <td class="col-descricao">Ler palavras no padrão não canônico.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H10</td>
+                                    <td class="col-descricao">Comparar palavras, identificando semelhanças e diferenças entre sons de sílabas iniciais, mediais e finais.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H11</td>
+                                    <td class="col-descricao">Identificar o espaçamento entre palavras na segmentação da escrita.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H12</td>
+                                    <td class="col-descricao">Identificar as direções da escrita.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H13</td>
+                                    <td class="col-descricao">Reconhecer a posição de palavras, de acordo com a ordem alfabética.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                
+                                <!-- EIXO DO CONHECIMENTO: LEITURA -->
+                                <tr>
+                                    <td class="col-habilidade">H14</td>
+                                    <td class="col-descricao">Ler frase.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H15</td>
+                                    <td class="col-descricao">Identificar o tema ou assunto de um texto ouvido.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H16</td>
+                                    <td class="col-descricao">Identificar o tema ou assunto de um texto lido.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H17</td>
+                                    <td class="col-descricao">Reconhecer o gênero discursivo de um texto.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H18</td>
+                                    <td class="col-descricao">Localizar informações explícitas em um texto lido.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H19</td>
+                                    <td class="col-descricao">Reconhecer a finalidade de um texto.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H20</td>
+                                    <td class="col-descricao">Inferir informações em um texto verbal.</td>
+                                    <td class="col-resultado resultado-negativo">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H21</td>
+                                    <td class="col-descricao">Inferir informações em textos que articulam linguagens verbal e não verbal.</td>
+                                    <td class="col-resultado resultado-positivo">Sim</td>
+                                </tr>
+                                
+                                <!-- EIXO DO CONHECIMENTO: ESCRITA -->
+                                <tr>
+                                    <td class="col-habilidade">H22</td>
+                                    <td class="col-descricao">Escrever palavras com diferentes padrões silábicos.</td>
+                                    <td class="col-resultado">
+                                        <div>casa: <span class="resultado-positivo">N3</span></div>
+                                        <div>bola: <span class="resultado-positivo">N4</span></div>
+                                        <div>janela: <span class="resultado-negativo">N1</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H23</td>
+                                    <td class="col-descricao">Escrever Frase a Partir de uma Imagem.</td>
+                                    <td class="col-resultado">
+                                        <div><span class="resultado-positivo">N4</span></div>
+                                        <div class="aspectos-grid">
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Estrutura:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Coesão:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Segmentação:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Letra Maiúscula:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Pontuação:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Ortografia:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H24</td>
+                                    <td class="col-descricao">Escrever uma frase ditada.</td>
+                                    <td class="col-resultado">
+                                        <div><span class="resultado-positivo">N4</span></div>
+                                        <div class="aspectos-grid">
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Estrutura:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Coesão:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Segmentação:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Letra Maiúscula:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Pontuação:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Ortografia:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-habilidade">H25</td>
+                                    <td class="col-descricao">Escrever texto a partir de uma situação dada.</td>
+                                    <td class="col-resultado">
+                                        <div><span class="resultado-positivo">N5</span></div>
+                                        <div class="aspectos-grid">
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Estrutura:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Coesão:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Segmentação:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Letra Maiúscula:</span>
+                                                <span class="resultado-positivo">T</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Pontuação:</span>
+                                                <span class="resultado-neutro">P</span>
+                                            </div>
+                                            <div class="aspecto-item">
+                                                <span class="aspecto-label">Ortografia:</span>
+                                                <span class="resultado-negativo">N</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Conclusão -->
+                    <div class="relatorio-section">
+                        <h3 class="section-title">Conclusão</h3>
+                        
+                        <div class="conclusao">
+                            <h4 class="conclusao-title">Análise do Desenvolvimento</h4>
+                            <p class="conclusao-text">
+                                O aluno Bruno Santos apresenta um desenvolvimento satisfatório nas habilidades básicas de alfabetização. 
+                                Demonstra boa capacidade de diferenciar desenhos de letras e reconhecer letras em contexto de palavras.
+                                <br><br>
+                                No eixo de Análise Linguística/Semiótica, o aluno apresenta bom desempenho no reconhecimento de sílabas e manipulação de unidades menores para formar novas palavras. No entanto, ainda apresenta dificuldades na identificação de rimas, no número de sílabas de palavras e na leitura de palavras no padrão não canônico.
+                                <br><br>
+                                No eixo de Leitura, o aluno consegue ler frases e identificar temas de textos, tanto ouvidos quanto lidos. Porém, ainda tem dificuldade em reconhecer gêneros discursivos, finalidades de textos e inferir informações em textos verbais.
+                                <br><br>
+                                No eixo de Escrita, o aluno alcançou níveis N4 e N5 em algumas habilidades, demonstrando boa estruturação textual e uso adequado de letras maiúsculas. Entretanto, ainda apresenta dificuldades em aspectos como segmentação, pontuação e ortografia, que foram avaliados como parcialmente realizados ou não realizados em algumas produções.
+                                <br><br>
+                                Recomenda-se atividades específicas para desenvolver a consciência fonológica, com foco em rimas e identificação do número de sílabas. Também é importante trabalhar a leitura de palavras no padrão não canônico e a compreensão de diferentes gêneros textuais e suas finalidades. Para a escrita, sugere-se atividades que reforcem a segmentação correta de palavras, o uso adequado da pontuação e a ortografia.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Assinatura -->
+                    <div class="assinatura">
+                        <div class="assinatura-linha">
+                            <p class="assinatura-nome">Ana Silva</p>
+                            <p class="assinatura-cargo">Professor(a) Responsável</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Botão de Imprimir -->
+                    <div class="print-container">
+                        <button id="btnImprimir" class="btn btn-primary btn-print">
+                            <span class="print-icon"></span>
+                            Imprimir Relatório
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Dados de exemplo para alunos
+        const alunos = {
+            "1": {
+                "A": [
+                    {
+                        nome: "Ana Silva",
+                        dataNascimento: "10/02/2016",
+                        telefone: "(11) 97654-3210",
+                        email: "responsavel.ana@email.com",
+                        cpf: "111.222.333-44"
+                    },
+                    {
+                        nome: "Bruno Santos",
+                        dataNascimento: "15/03/2016",
+                        telefone: "(11) 98765-4321",
+                        email: "responsavel.bruno@email.com",
+                        cpf: "123.456.789-00"
+                    },
+                    {
+                        nome: "Carla Oliveira",
+                        dataNascimento: "22/05/2016",
+                        telefone: "(11) 91234-5678",
+                        email: "responsavel.carla@email.com",
+                        cpf: "987.654.321-00"
+                    }
+                ],
+                "B": [
+                    {
+                        nome: "Daniel Lima",
+                        dataNascimento: "05/04/2016",
+                        telefone: "(11) 92345-6789",
+                        email: "responsavel.daniel@email.com",
+                        cpf: "456.789.123-00"
+                    },
+                    {
+                        nome: "Eduardo Costa",
+                        dataNascimento: "18/07/2016",
+                        telefone: "(11) 93456-7890",
+                        email: "responsavel.eduardo@email.com",
+                        cpf: "789.123.456-00"
+                    }
+                ]
+            },
+            "2": {
+                "A": [
+                    {
+                        nome: "Fernanda Souza",
+                        dataNascimento: "12/01/2015",
+                        telefone: "(11) 94567-8901",
+                        email: "responsavel.fernanda@email.com",
+                        cpf: "321.654.987-00"
+                    },
+                    {
+                        nome: "Gabriel Pereira",
+                        dataNascimento: "25/03/2015",
+                        telefone: "(11) 95678-9012",
+                        email: "responsavel.gabriel@email.com",
+                        cpf: "654.987.321-00"
+                    }
+                ],
+                "B": [
+                    {
+                        nome: "Helena Martins",
+                        dataNascimento: "08/06/2015",
+                        telefone: "(11) 96789-0123",
+                        email: "responsavel.helena@email.com",
+                        cpf: "987.321.654-00"
+                    },
+                    {
+                        nome: "Igor Alves",
+                        dataNascimento: "30/09/2015",
+                        telefone: "(11) 97890-1234",
+                        email: "responsavel.igor@email.com",
+                        cpf: "654.321.987-00"
+                    }
+                ]
+            }
+        };
+        
+        // Elementos do DOM
+        const anoSelect = document.getElementById('ano');
+        const turmaSelect = document.getElementById('turma');
+        const alunoSelect = document.getElementById('aluno');
+        const btnRelatorio = document.getElementById('btnRelatorio');
+        const btnLimpar = document.getElementById('btnLimpar');
+        const relatorioContainer = document.getElementById('relatorioContainer');
+        const btnImprimir = document.getElementById('btnImprimir');
+        
+        // Elementos do relatório
+        const dataEmissao = document.getElementById('dataEmissao');
+        const nomeAluno = document.getElementById('nomeAluno');
+        const dataNascimento = document.getElementById('dataNascimento');
+        const anoTurma = document.getElementById('anoTurma');
+        const telefone = document.getElementById('telefone');
+        const email = document.getElementById('email');
+        const cpf = document.getElementById('cpf');
+        
+        // Event Listeners
+        anoSelect.addEventListener('change', function() {
+            turmaSelect.disabled = false;
+            turmaSelect.selectedIndex = 0;
+            alunoSelect.disabled = true;
+            alunoSelect.innerHTML = '<option value="" disabled selected>Selecione o aluno</option>';
+            btnRelatorio.disabled = true;
+        });
+        
+        turmaSelect.addEventListener('change', function() {
+            const ano = anoSelect.value;
+            const turma = turmaSelect.value;
+            
+            if (ano && turma) {
+                alunoSelect.disabled = false;
+                alunoSelect.innerHTML = '<option value="" disabled selected>Selecione o aluno</option>';
+                
+                // Carregar alunos da turma selecionada
+                const alunosTurma = alunos[ano][turma] || [];
+                alunosTurma.forEach((aluno, index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.textContent = aluno.nome;
+                    alunoSelect.appendChild(option);
+                });
+            }
+        });
+        
+        alunoSelect.addEventListener('change', function() {
+            btnRelatorio.disabled = !alunoSelect.value;
+        });
+        
+        btnRelatorio.addEventListener('click', function() {
+            const ano = anoSelect.value;
+            const turma = turmaSelect.value;
+            const alunoIndex = alunoSelect.value;
+            
+            if (ano && turma && alunoIndex) {
+                // Obter dados do aluno selecionado
+                const aluno = alunos[ano][turma][alunoIndex];
+                
+                // Atualizar dados no relatório
+                const hoje = new Date();
+                dataEmissao.textContent = hoje.toLocaleDateString('pt-BR');
+                nomeAluno.textContent = aluno.nome;
+                dataNascimento.textContent = aluno.dataNascimento;
+                anoTurma.textContent = `${ano}º Ano - Turma ${turma}`;
+                telefone.textContent = aluno.telefone;
+                email.textContent = aluno.email;
+                cpf.textContent = aluno.cpf;
+                
+                // Exibir o relatório
+                relatorioContainer.style.display = 'block';
+            }
+        });
+        
+        btnLimpar.addEventListener('click', function() {
+            // Resetar o formulário
+            anoSelect.selectedIndex = 0;
+            turmaSelect.disabled = true;
+            turmaSelect.selectedIndex = 0;
+            alunoSelect.disabled = true;
+            alunoSelect.innerHTML = '<option value="" disabled selected>Selecione o aluno</option>';
+            btnRelatorio.disabled = true;
+            relatorioContainer.style.display = 'none';
+        });
+        
+        btnImprimir.addEventListener('click', function() {
+            window.print();
+        });
+        
+        // Definir data atual
+        const dataAtual = new Date();
+        dataEmissao.textContent = dataAtual.toLocaleDateString('pt-BR');
+    </script>
+</body>
+</html>

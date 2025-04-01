@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDR Avaliação - Login</title>
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #EFF6FF, #ffffff);
+            color: #1F2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #3B82F6;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #2563EB;
+            text-decoration: underline;
+        }
+        
+        /* Card */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .card-header {
+            padding: 1.5rem 1.5rem 0.5rem;
+            text-align: center;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3B82F6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description {
+            color: #6B7280;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-content {
+            padding: 1rem 1.5rem;
+        }
+        
+        .card-footer {
+            padding: 1rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        /* Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #93C5FD;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .forgot-password {
+            font-size: 0.875rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        
+        .signup-text {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">NDR Avaliação</h1>
+            <p class="card-description">Entre com suas credenciais para acessar o sistema</p>
+        </div>
+        
+        <div class="card-content">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="login" class="form-label">Login</label>
+                    <input type="text" id="login" class="form-input" placeholder="Digite seu login" required>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-header">
+                        <label for="password" class="form-label">Senha</label>
+                        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+                    <input type="password" id="password" class="form-input" placeholder="Digite sua senha" required>
+                </div>
+            </form>
+        </div>
+        
+        <div class="card-footer">
+            <button type="submit" form="loginForm" class="btn btn-primary">Entrar</button>
+            <p class="signup-text">
+                Não tem uma conta? <a href="CadastroProfessor.html">Cadastre-se</a>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Script simples para demonstrar o funcionamento do formulário
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obter os valores do formulário
+            const login = document.getElementById('login').value;
+            const password = document.getElementById('password').value;
+            
+            // Em uma aplicação real, enviaríamos esses dados para autenticação no servidor
+            console.log({ login, password });
+            
+            // Redirecionar para a página de gestão (simulação de login bem-sucedido)
+            window.location.href = 'GestaoUsuario.html';
+        });
+    </script>
+</body>
+</html>

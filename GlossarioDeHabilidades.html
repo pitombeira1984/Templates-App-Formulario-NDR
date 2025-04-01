@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NDR Avaliação - Glossário de Habilidades</title>
+    <style>
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #EFF6FF, #ffffff);
+            color: #1F2937;
+            padding-bottom: 2rem;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3B82F6;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .user-name {
+            font-weight: 500;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #3B82F6;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .back-link:hover {
+            color: #2563EB;
+        }
+        
+        .back-icon::before {
+            content: "←";
+            margin-right: 0.5rem;
+        }
+        
+        /* Card */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #DBEAFE;
+            margin-bottom: 2rem;
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background-color: #EFF6FF;
+            border-bottom: 1px solid #DBEAFE;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3B82F6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-description {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #E5E7EB;
+            color: #4B5563;
+        }
+        
+        .btn-outline:hover {
+            background-color: #F3F4F6;
+        }
+        
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        
+        /* Glossário */
+        .glossario-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .eixo-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #3B82F6;
+        }
+        
+        .habilidades-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .habilidades-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .habilidades-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .habilidade-card {
+            background-color: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .habilidade-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .habilidade-codigo {
+            display: inline-block;
+            font-weight: 600;
+            color: #3B82F6;
+            background-color: #EFF6FF;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .habilidade-descricao {
+            color: #4B5563;
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+        
+        /* Info box */
+        .info-box {
+            background-color: #EFF6FF;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1E40AF;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-text {
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+        
+        /* Ícones */
+        .icon-book::before {
+            content: "📚";
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+        
+        .icon-logout::before {
+            content: "↪";
+            font-size: 1rem;
+            margin-right: 0.25rem;
+        }
+        
+        /* Filtro e Pesquisa */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-container {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #DBEAFE;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            background-color: white;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #93C5FD;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background-color: #F3F4F6;
+            color: #4B5563;
+            border: 1px solid #E5E7EB;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #E5E7EB;
+        }
+        
+        .filter-btn.active {
+            background-color: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+        
+        /* Impressão */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            
+            header, .back-link, .filter-container {
+                display: none !important;
+            }
+            
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+            }
+            
+            .card {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+            
+            .card-header {
+                background-color: white;
+                border-bottom: 2px solid #000;
+                padding: 1rem 0;
+            }
+            
+            .card-title {
+                color: #000;
+            }
+            
+            .card-content {
+                padding: 1rem 0;
+            }
+            
+            .habilidades-grid {
+                grid-template-columns: 1fr !important;
+                gap: 0.5rem;
+            }
+            
+            .habilidade-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                background-color: white;
+                border: 1px solid #ccc;
+                padding: 0.5rem;
+            }
+            
+            .habilidade-codigo {
+                background-color: white;
+                border: 1px solid #ccc;
+            }
+            
+            .eixo-title {
+                break-before: page;
+                page-break-before: always;
+                margin-top: 1rem;
+                color: #000;
+                border-bottom: 1px solid #000;
+            }
+            
+            .eixo-title:first-of-type {
+                break-before: avoid;
+                page-break-before: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">NDR Avaliação</div>
+                <div class="user-actions">
+                    <span class="user-name">Professor(a) Ana Silva</span>
+                    <a href="login.html" class="btn btn-outline">
+                        <span class="icon-logout"></span>
+                        Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="GestaoUsuario.html" class="back-link">
+            <span class="back-icon"></span>
+            Voltar para o painel
+        </a>
+        
+        <!-- Glossário de Habilidades -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title"><span class="icon-book"></span>Glossário de Habilidades NDR</h1>
+                <p class="card-description">Consulte as definições das habilidades avaliadas no sistema NDR</p>
+            </div>
+            
+            <div class="card-content">
+                <div class="info-box">
+                    <h3 class="info-title">Sobre o Glossário</h3>
+                    <p class="info-text">Este glossário contém todas as habilidades avaliadas no sistema NDR, organizadas por eixos do conhecimento. Utilize os filtros abaixo para encontrar habilidades específicas.</p>
+                </div>
+                
+                <!-- Filtros e Pesquisa -->
+                <div class="filter-container">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar habilidades..." aria-label="Pesquisar habilidades">
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="todos">Todos</button>
+                        <button class="filter-btn" data-filter="escrita-alfabetica">Escrita Alfabética</button>
+                        <button class="filter-btn" data-filter="leitura">Leitura</button>
+                        <button class="filter-btn" data-filter="escrita">Escrita</button>
+                    </div>
+                </div>
+                
+                <!-- Eixo: Apropriação do Sistema de Escrita Alfabética -->
+                <div class="glossario-section" id="escrita-alfabetica">
+                    <h2 class="eixo-title">Eixo do Conhecimento: Apropriação do Sistema de Escrita Alfabética</h2>
+                    <div class="habilidades-grid">
+                        <div class="habilidade-card" data-codigo="H1">
+                            <span class="habilidade-codigo">H1</span>
+                            <p class="habilidade-descricao">Diferenciar desenhos/grafismos (símbolos) de grafemas/letras (signos).</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H2">
+                            <span class="habilidade-codigo">H2</span>
+                            <p class="habilidade-descricao">Reconhecer as letras do alfabeto em contexto de palavras.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H3">
+                            <span class="habilidade-codigo">H3</span>
+                            <p class="habilidade-descricao">Reconhecer sílabas em diferentes padrões.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H4">
+                            <span class="habilidade-codigo">H4</span>
+                            <p class="habilidade-descricao">Manipular as unidades menores (fonemas e/ou sílabas) de uma palavra para formar novas palavras.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H5">
+                            <span class="habilidade-codigo">H5</span>
+                            <p class="habilidade-descricao">Identificar rimas.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H6">
+                            <span class="habilidade-codigo">H6</span>
+                            <p class="habilidade-descricao">Identificar o número de sílabas de uma palavra.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H7">
+                            <span class="habilidade-codigo">H7</span>
+                            <p class="habilidade-descricao">Relacionar palavras que apresentem o mesmo número de sílabas.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H8">
+                            <span class="habilidade-codigo">H8</span>
+                            <p class="habilidade-descricao">Ler palavras no padrão canônico.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H9">
+                            <span class="habilidade-codigo">H9</span>
+                            <p class="habilidade-descricao">Ler palavras no padrão não canônico.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H10">
+                            <span class="habilidade-codigo">H10</span>
+                            <p class="habilidade-descricao">Comparar palavras, identificando semelhanças e diferenças entre sons de sílabas iniciais, mediais e finais.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H11">
+                            <span class="habilidade-codigo">H11</span>
+                            <p class="habilidade-descricao">Identificar o espaçamento entre palavras na segmentação da escrita.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H12">
+                            <span class="habilidade-codigo">H12</span>
+                            <p class="habilidade-descricao">Identificar as direções da escrita.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H13">
+                            <span class="habilidade-codigo">H13</span>
+                            <p class="habilidade-descricao">Reconhecer a posição de palavras, de acordo com a ordem alfabética.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Eixo: Leitura -->
+                <div class="glossario-section" id="leitura">
+                    <h2 class="eixo-title">Eixo do Conhecimento: Leitura</h2>
+                    <div class="habilidades-grid">
+                        <div class="habilidade-card" data-codigo="H14">
+                            <span class="habilidade-codigo">H14</span>
+                            <p class="habilidade-descricao">Ler frase.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H15">
+                            <span class="habilidade-codigo">H15</span>
+                            <p class="habilidade-descricao">Identificar o tema ou assunto de um texto ouvido.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H16">
+                            <span class="habilidade-codigo">H16</span>
+                            <p class="habilidade-descricao">Identificar o tema ou assunto de um texto lido.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H17">
+                            <span class="habilidade-codigo">H17</span>
+                            <p class="habilidade-descricao">Reconhecer o gênero discursivo de um texto.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H18">
+                            <span class="habilidade-codigo">H18</span>
+                            <p class="habilidade-descricao">Localizar informações explícitas em um texto lido.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H19">
+                            <span class="habilidade-codigo">H19</span>
+                            <p class="habilidade-descricao">Reconhecer a finalidade de um texto.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H20">
+                            <span class="habilidade-codigo">H20</span>
+                            <p class="habilidade-descricao">Inferir informações em um texto verbal.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H21">
+                            <span class="habilidade-codigo">H21</span>
+                            <p class="habilidade-descricao">Inferir informações em textos que articulam linguagens verbal e não verbal.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Eixo: Escrita -->
+                <div class="glossario-section" id="escrita">
+                    <h2 class="eixo-title">Eixo do Conhecimento: Escrita</h2>
+                    <div class="habilidades-grid">
+                        <div class="habilidade-card" data-codigo="H22">
+                            <span class="habilidade-codigo">H22</span>
+                            <p class="habilidade-descricao">Escrever palavras com diferentes padrões silábicos.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H23">
+                            <span class="habilidade-codigo">H23</span>
+                            <p class="habilidade-descricao">Escrever frase a partir de uma imagem.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H24">
+                            <span class="habilidade-codigo">H24</span>
+                            <p class="habilidade-descricao">Escrever uma frase ditada.</p>
+                        </div>
+                        <div class="habilidade-card" data-codigo="H25">
+                            <span class="habilidade-codigo">H25</span>
+                            <p class="habilidade-descricao">Escrever texto a partir de uma situação dada.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botão de Imprimir -->
+                <div class="print-container" style="text-align: center; margin-top: 2rem;">
+                    <button id="btnImprimir" class="btn btn-primary">
+                        <span style="margin-right: 0.5rem;">🖨️</span>
+                        Imprimir Glossário
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const habilidadeCards = document.querySelectorAll('.habilidade-card');
+        const glossarioSections = document.querySelectorAll('.glossario-section');
+        const btnImprimir = document.getElementById('btnImprimir');
+        
+        // Filtrar habilidades por texto de pesquisa
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            habilidadeCards.forEach(card => {
+                const codigo = card.getAttribute('data-codigo').toLowerCase();
+                const descricao = card.querySelector('.habilidade-descricao').textContent.toLowerCase();
+                
+                if (codigo.includes(searchTerm) || descricao.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Verificar se há cards visíveis em cada seção
+            glossarioSections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.habilidade-card[style="display: block"]').length;
+                if (visibleCards === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+        });
+        
+        // Filtrar por eixo do conhecimento
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remover classe ativa de todos os botões
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Adicionar classe ativa ao botão clicado
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                // Mostrar/ocultar seções com base no filtro
+                if (filter === 'todos') {
+                    glossarioSections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+                    
+                    habilidadeCards.forEach(card => {
+                        card.style.display = 'block';
+                    });
+                } else {
+                    glossarioSections.forEach(section => {
+                        if (section.id === filter) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                }
+                
+                // Limpar campo de pesquisa
+                searchInput.value = '';
+            });
+        });
+        
+        // Imprimir glossário
+        btnImprimir.addEventListener('click', function() {
+            // Mostrar todas as seções antes de imprimir
+            glossarioSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            
+            habilidadeCards.forEach(card => {
+                card.style.display = 'block';
+            });
+            
+            window.print();
+        });
+    </script>
+</body>
+</html>
